@@ -7,6 +7,7 @@ Frederik Bezuidenhout
 
 MIN_LENGTH = 5
 
+
 def main():
     password = get_password()
     conceal_password(password)
@@ -26,5 +27,6 @@ def get_password():
 def conceal_password(password):
     concealed_password = len(password) * "*"
     print(concealed_password)
+
 
 main()
