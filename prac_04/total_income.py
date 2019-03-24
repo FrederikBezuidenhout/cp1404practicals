@@ -17,6 +17,7 @@ def main():
 
 
 def report_income(incomes, month_number):
+    """Reports income and totals for each month."""
     print("\nIncome Report\n-------------")
     total = 0
     for month in range(1, month_number + 1):
