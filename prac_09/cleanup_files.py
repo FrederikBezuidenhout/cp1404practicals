@@ -29,4 +29,15 @@ def get_fixed_filename(filename):
     return new_name
 
 
-main()
+def fix_camelcase():
+    filename = "CamelCase.txt"
+    new_name = ''
+    for letter in filename:
+        if letter.isupper():
+            letter = '_' + letter
+        new_name += letter
+    print(new_name)
+
+
+fix_camelcase()
+#main()
