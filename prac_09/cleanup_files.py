@@ -11,34 +11,31 @@ def main():
     os.chdir('Lyrics')
     print("Files in {}:\n{}\n".format(os.getcwd(), os.listdir('.')))
 
-    try:
-        os.mkdir('temp')
-    except FileExistsError:
-        pass
+    for directory_name, subdirectories, filenames in os.walk('.'):
+        print("Directory:", directory_name)
+        print("\tcontains subdirectories:", subdirectories)
+        print("\tand files:", filenames)
+        print("(Current working directory is: {})".format(os.getcwd()))
 
-    for filename in os.listdir('.'):
-        if os.path.isdir(filename):
-            continue
-
-        new_name = get_fixed_filename(filename)
-        print("Renaming {} to {}".format(filename, new_name))
+        for filename in filenames:
+            new_name = get_fixed_filename(filename)
+            print("Renaming {} to {}".format(filename, new_name))
 
 
 def get_fixed_filename(filename):
-    new_name = filename.replace(" ", "_").replace(".TXT", ".txt")
+
+    filename = filename.replace(".TXT", ".txt")
+    new_name = ''
+    position = len(new_name)
+    for letter in filename:
+        if letter == ' ':
+            letter = '_'
+        if letter.isupper() and new_name[position - 1:].islower():
+            new_name += '_'
+        elif letter.isupper() and new_name[position - 1:].isupper():
+            new_name += '_'
+        new_name += letter
     return new_name
 
 
-def fix_camelcase():
-    filename = "CamelCase.txt"
-    new_name = ''
-    new_name += filename[0]
-    for letter in filename[1:]:
-        if letter.isupper():
-            letter = '_' + letter
-        new_name += letter
-    print(new_name)
-
-
-fix_camelcase()
-#main()
+main()
